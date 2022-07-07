@@ -1,0 +1,116 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Carrinho</ion-title>
+    <ion-button routerDirection="back" routerLink="/home">
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <div class="carrinho">
+    <div class="itens-title">
+      <div><span>Item</span> <span>Preço</span></div>
+    </div>
+    <div class="itens-content" *ngFor="let c of carrinho; let i = index">
+      <div class="data-itens-content" style="justify-content: flex-start">
+        <span style="margin-right: 0px">{{c.quantidade}}x</span>
+        <span>{{c.produto.nome}}</span>
+      </div>
+      <div class="price-itens-content">
+        <span style="margin: 5px 0px"
+          >{{c.produto.valor * c.quantidade | currency: 'BRL'}}
+        </span>
+        <div class="trash-icon">
+          <ion-icon
+            style="font-size: 20px; margin: 5px 10px; color: #eb3340"
+            name="ellipsis-vertical-outline"
+            (click)="remover(i)"
+          ></ion-icon>
+        </div>
+      </div>
+    </div>
+    <div class="itens-footer">
+      <div>
+        <span>Total</span> <span>{{totalCarrinho | currency: 'BRL'}}</span>
+      </div>
+    </div>
+  </div>
+  <form (ngSubmit)="enviarPedido()">
+    <h3>
+      Finalizar pedido
+      <ion-icon name="checkmark-done-outline"></ion-icon>
+    </h3>
+    <ion-item>
+      <ion-label position="floating">Nome completo</ion-label>
+      <ion-input type="text" [(ngModel)]="nome" name="nome"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Telefone</ion-label>
+      <ion-input
+        type="tel"
+        [(ngModel)]="telefone"
+        placeholder="(00) 00000-0000"
+        name="telefone"
+      ></ion-input>
+    </ion-item>
+    <ion-list>
+      <ion-radio-group
+        [(ngModel)]="entrega"
+        name="entrega"
+        (ionChange)="verificar()"
+      >
+        <ion-list-header>
+          <ion-label
+            >Entrega
+
+            <ion-icon name="bicycle-outline"></ion-icon>
+          </ion-label>
+        </ion-list-header>
+        <ion-item>
+          <ion-label>Delivery</ion-label>
+          <ion-radio slot="start" value="delivery"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Retirada no local</ion-label>
+          <ion-radio slot="start" value="balcao"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+    <ion-item *ngIf="mostrarEndereco">
+      <ion-label position="floating">Endereço</ion-label>
+      <ion-input
+        type="text"
+        [(ngModel)]="endereco"
+        name="endereco"
+        placeholder="Rua X, 999. Bairro."
+      ></ion-input>
+    </ion-item>
+    <ion-list>
+      <ion-radio-group [(ngModel)]="pagamento" name="pagamento">
+        <ion-list-header>
+          <ion-label
+            >Formas de pagamento
+
+            <ion-icon name="card-outline"></ion-icon>
+          </ion-label>
+        </ion-list-header>
+        <ion-item>
+          <ion-label>Pix</ion-label>
+          <ion-radio slot="start" value="pix"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Dinheiro</ion-label>
+          <ion-radio slot="start" value="dinheiro"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Cartão Débito/Crédito</ion-label>
+          <ion-radio slot="start" value="cartao"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+    <ion-button type="submit" style="position: relative; left: 232px; top: 20px"
+      >Finalizar Pedido</ion-button
+    >
+  </form>
+</ion-content>

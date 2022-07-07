@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> Descrição do Produto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <!-- fab placed to the top end -->
+  <ion-fab horizontal="end" slot="fixed">
+    <ion-fab-button routerDirection="back" routerLink="/home">
+      <ion-icon name="arrow-back" style="color: #000"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <div class="card">
+    <ion-card>
+      <div class="image">
+        <img src="{{produto.foto || 'http://via.placeholder.com/150'}}" />
+      </div>
+      <ion-card-header>
+        <ion-card-title>{{produto.nome}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <i>{{produto.descricao}}</i>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <footer class="footer">
+    <div class="card-footer text-muted p-3">
+      <div class="d-flex align-items-center justify-content-between">
+        <div class="buttons d-flex">
+          <ion-fab-button (click)="subQtd()">
+            <ion-icon name="remove" style="color: #000"></ion-icon>
+          </ion-fab-button>
+          <span style="background: #ffb238" class="p-3 m-1 rounded-pill"
+            >{{quantidade}}</span
+          >
+          <ion-fab-button (click)="addQtd()">
+            <ion-icon name="add" style="color: #000"></ion-icon>
+          </ion-fab-button>
+        </div>
+        <ion-button
+          class="d-flex justify-content-end"
+          size="medium"
+          horizontal="end"
+          (click)="addCarrinho()"
+          routerLink="/home"
+          >Adicionar {{produto.valor * quantidade | currency:'BRL'}}</ion-button
+        >
+      </div>
+    </div>
+  </footer>
+</ion-content>

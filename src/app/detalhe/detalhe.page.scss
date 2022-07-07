@@ -1,0 +1,28 @@
+ion-card {
+  .image {
+    width: 341px;
+
+    img {
+      width: 341px;
+      max-width: 341px;
+      border: 0;
+      height: 317px;
+    }
+  }
+}
+ion-button {
+  --background: #ffb238;
+  --color: black !important;
+}
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #eb3340;
+}
+ion-fab-button {
+  --background: #ffb238;
+  ion-icon {
+    --color: black;
+  }
+}
